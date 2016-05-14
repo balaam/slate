@@ -8,7 +8,16 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - errors
+    - renderer
+    - savegame
+    - sound
+    - soundstream
+    - sprite
+    - system
+    - texture
+    - time
+    - touch
+    - vector
 
 search: true
 ---
@@ -18,6 +27,8 @@ search: true
 Dinodeck is a multiplatform, fast, rapid game development library. Powered by Lua, using OpenGL for graphics.
 
 You can download the latest version from the website [dinodeck.com](http://dinodeck.com).
+
+This is documentation for version 1.0 of the engine.
 
 # Structure
 
@@ -101,7 +112,7 @@ Data for the execute command is provided through the post data.
 
 #### Why!?
 
-Using these commands you can use Dinodeck as almost an interactive editor. Tell it reload from your text editor, or send over a snippet of code, interatively query the program at runtime. It's a pretty powerful idea and one that that's not been fully explored!
+Using these commands you can use Dinodeck almost like an interactive editor. Tell it reload from your text editor, or send over a snippet of code, interatively query the program at runtime. It's a pretty powerful idea and one that that's not been fully explored!
 
 <aside class="warning">For a public release the <code>webserver</code> flag should be set to <code>false</code>.</aside>
 
@@ -159,6 +170,15 @@ textures | Image files.
 sounds | Sound files.
 soundstreams | Sound files to be streamed off disk. **Not supported**
 
+# General Notes
+
+## Escape To Quit
+
+At the moment pressing Escape will close the application. This isn't a very good default behaviour and will be removed in a future update.
+
+## Running Multiple Versions
+
+If you run multiple versions with the webserver enabled they try to open the same ports and every version after the first application won't shut down cleanly.
 
 # Global Functions
 
@@ -179,7 +199,7 @@ Function | Parameters | Description
 LoadLibrary('Renderer')
 ```
 
-`void LoadLibrary( string )`
+`nil LoadLibrary( string )`
 
 LoadLibrary takes in a string that must be the name of a valid library.
 
@@ -212,7 +232,7 @@ Vector | Vector class.
 gDt = GetDeltaTime()
 ```
 
-`void GetDeltaTime( void )`
+`nil GetDeltaTime( nil )`
 
 Returns the time in seconds that the last frame took to execute.
 
@@ -226,18 +246,20 @@ Delta is often used to make animation run smoothly no matter the game speed. Din
 local time_now = GetTime()
 ```
 
-`number GetTime( void )`
+`number GetTime( nil )`
 
 Returns the time in seconds that have elapsed since midnight Coordinated Universal Time (UTC), 1 January 1970 (i.e. Unix Epoch time). Often used for seeding Lua's random number generator.
 
 
 # Libraries
 
-## Asset
+Dinodeck comes with a number of built in libraries. These can be loaded into your game using the `LoadLibrary` function.
+
+# > Asset
 
 Assets are files used by the game. In practice we only care about the lua files in the manifest.
 
-### Run
+## Run
 
 > Example use of `Asset.Run`
 
@@ -266,7 +288,7 @@ manifest =
 Asset.Run('AnotherFile.lua')
 ```
 
-`void Asset.Run( string asset_name )`
+`nil Asset.Run( string asset_name )`
 
 `asset_name` is expected to be a string.
 
@@ -274,11 +296,11 @@ The function takes in the name of an asset as defined in the manifest file. It t
 
 Assets are most commonly Lua scripts, using Asset.Run allows projects to be composed of multiple scripts.
 
-## Http
+# > Http
 
 The Http library allows data to be retrieved and sent from websites. This opens up the possibility of leaderboards, asynchronous multiplayer game, cloud saves, integration of social services and interesting things of that sort.
 
-### Post
+## Post
 
 > Example use of Http.Post
 
@@ -295,7 +317,7 @@ Http.Post("http://www.example.com",
 
 > Here data will be the html page of "http://www.example.com".
 
-`void Http.Post(string url, HttpPostData post_data, function OnSuccess, function OnFailure)`
+`nil Http.Post(string url, HttpPostData post_data, function OnSuccess, function OnFailure)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -311,7 +333,7 @@ Send a POST request to a website. `OnSuccess` is called if contact is successful
 
 Used to attach data to a Http POST request.
 
-### Create
+## Create
 
 > Example of creating a HttpPostData object.
 
@@ -329,15 +351,15 @@ Creates a HttpPostData object. The encoding_type may be "application/x-www-form-
 
 Generally it's best to use "multipart/form-data" but it also depends on the site you're sending the data to.
 
-#### application/x-www-form-urlencoded
+### application/x-www-form-urlencoded
 
 The data is attached to the end of the URL
 
-#### multipart/form-data
+### multipart/form-data
 
 The data is attached to the request to the request in chunks.
 
-### AddValue
+## AddValue
 
 > Add Value example
 
@@ -346,7 +368,7 @@ local postData = HttpPostData.Create("application/x-www-form-urlencoded")
 postData:AddValue("data", "{score=1000}")
 ```
 
-`void HttpPostData.AddValue(string key, string value)`
+`nil HttpPostData.AddValue(string key, string value)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -355,7 +377,7 @@ value | string | The string value of the data to attach to the request. | ✘
 
 Adds a key value pair to the post data that can then be sent on to the post request.
 
-## Keyboard
+# > Keyboard
 
 The keyboard library lets you query the state of the keys.
 
@@ -423,7 +445,7 @@ Key | Description
 
 <aside class="warning">The number keys are not exposed. That is certainly an oversight!</aside>
 
-### Held
+## Held
 
 > Example of the `Held` function.
 
@@ -448,7 +470,7 @@ key_code  | int | The key to check if held. Refer to the table in the Keyboard L
 
 Returns true if the key is currently being pressed.
 
-### JustReleased
+## JustReleased
 
 `bool Keyboard.JustReleased( int key_code )`
 
@@ -458,17 +480,17 @@ key_code  | int | The key to check if held. Refer to the table in the Keyboard L
 
 Returns true if the key was released during the previous frame.
 
-### JustPressed
+## JustPressed
 
 `bool Keyboard.JustPressed( int key_code )`
 
 Returns true if the key was pressed during the previous frame.
 
-## Matrix
+# > Matrix
 
 A matrix 4x4 class. Matrices are useful for transformations.
 
-### Create
+## Create
 
 > Example Matrix `Creates` functions.
 
@@ -486,7 +508,7 @@ local m3 = Matrix:Create(
   )
 ```
 
-`Matrix Matrix.Create( void )`
+`Matrix Matrix.Create( nil )`
 
 If no data is passed in then a the matrix is initialised to the identity matrix.
 
@@ -522,7 +544,7 @@ row3 | Vector | Forth row of the matrix as a vector | ✘
 
 This function creates a new matrix object.
 
-### Multiply
+## Multiply
 
 The multiply operation supports matrix, matrix multiplication and matrix vector multiplication.
 
@@ -541,11 +563,11 @@ lhs | Matrix | Left-hand side matrix in the multiplication. | ✘
 rhs | Vector | Right-hand side vector in the multiplication. | ✘
 
 
-### SetColumn
+## SetColumn
 
 This function lets us update a column inside a matrix.
 
-`void Matrix.SetColumn(Matrix m, int index, Vector v)`
+`nil Matrix.SetColumn(Matrix m, int index, Vector v)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -553,7 +575,7 @@ m | Matrix | Matrix to update. | ✘
 index | number | The matrix column to update 1 - 4. | ✘
 v | Vector | The values to write into the column. | ✘
 
-`void Matrix.SetColumn(Matrix m, int index, float x, float y, float z, float w)`
+`nil Matrix.SetColumn(Matrix m, int index, float x, float y, float z, float w)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -564,11 +586,11 @@ y | number | Value to write position 2 of the column. | ✘
 z | number | Value to write position 3 of the column. | ✘
 w | number | Value to write position 4 of the column. | ✘
 
-### SetRotation
+## SetRotation
 
 Write a rotation transformation into the matrix.
 
-`void Matrix.SetRotation(Matrix m, Vector axis, float angle)`
+`nil Matrix.SetRotation(Matrix m, Vector axis, float angle)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -576,29 +598,29 @@ m | Matrix | The matrix to write the rotation data to. | ✘
 axis | Vector | The normal vector to rotate around. | ✘
 angle | float | The amount of rotation to apply in degrees. | ✘
 
-### SetScale
+## SetScale
 
 Write a scale transform into the matrix.
 
-`void Matrix.SetScale(Matrix m, Vector scale)`
+`nil Matrix.SetScale(Matrix m, Vector scale)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 m | Matrix | The matrix to write the scale data to. | ✘
 scale | Vector | The scale to apply along the x, y and z axis. | ✘
 
-### SetTranslate
+## SetTranslate
 
 Write a translate transform into the matrix.
 
-`void Matrix.SetTranslate(Matrix m, Vector translate)`
+`nil Matrix.SetTranslate(Matrix m, Vector translate)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 m | Matrix | The matrix to write the translate data to. | ✘
 scale | Vector | The translation to apply to the x, y and z axis. | ✘
 
-### Override: To String
+## Override: To String
 
 Return the matrix as a string.
 
@@ -612,18 +634,18 @@ print(m)
 > 0, 0, 0, 1
 ```
 
-### Override: Multiple Operator
+## Override: Multiple Operator
 
 Multiply a matrix with another matrix or a vector.
 
 ```lua
 local m = Matrix:Create()
 local m2 = m * m            -- returns a martix
-local v = Vector:Create()
+local v = Vector.Create()
 local v3 = m * v            -- returns a vector
 ```
 
-## Mouse
+# > Mouse
 
 The `Mouse` library lets us query the mouse.
 The mouse adds the following global variables for querying the mouse buttons.
@@ -632,7 +654,7 @@ The mouse adds the following global variables for querying the mouse buttons.
 - `MOUSE_BUTTON_MIDDLE`
 - `MOUSE_BUTTON_RIGHT`
 
-###X
+##X
 
 The current X position of the mouse.
 
@@ -642,7 +664,7 @@ The current X position of the mouse.
 local x = Mouse:X()
 ```
 
-###Y
+##Y
 
 The current Y position of the mouse.
 
@@ -652,25 +674,25 @@ The current Y position of the mouse.
 local y = Mouse:Y()
 ```
 
-###Position
+##Position
 
 The position X, Y position of the map returned as a vector. The z coordinate is 0.
 
 `Vector Mouse.Position()`
 
-###PrevPosition
+##PrevPosition
 
 The position of the mouse on the previous frame.
 
 `Vector Mouse.PrevPosition()`
 
-###Difference
+##Difference
 
 The difference between the `PrevPosition` and the `Position` as a vector.
 
 `Vector Mouse.Difference()`
 
-###JustPressed
+##JustPressed
 
 If a mouse button has just been pressed down.
 
@@ -686,7 +708,7 @@ if Mouse.JustPressed(MOUSE_BUTTON_LEFT) then
 end
 ```
 
-###JustReleased
+##JustReleased
 
 If a mouse button has just been pressed released.
 
@@ -702,7 +724,7 @@ if Mouse.JustPressed(MOUSE_BUTTON_LEFT) then
 end
 ```
 
-###Held
+##Held
 
 Is the current mouse button being held.
 
@@ -721,151 +743,9 @@ if Mouse.Held(MOUSE_BUTTON_LEFT) then
 end
 ```
 
-## Renderer
 
-The renderer library is responsible for drawing things to the screen.
 
-## AlignText
 
-# Authentication
 
-> To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
 
