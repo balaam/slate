@@ -52,7 +52,7 @@ Set the vertical alignment for any subsequent text drawn to this renderer.
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 renderer | Renderer | The text alignment is set for this renderer. | ✘
-align | Takes in a "top", "bottom" or "center" alignment value. | ✘
+align | string | Takes in a "top", "bottom" or "center" alignment value. | ✘
 
 
 ## Create
@@ -74,15 +74,15 @@ end
 
 Draw an unfilled circle to the screen. The circle is always white.
 
-`nil Renderer.DrawCircle2d(Renderer renderer, float x, float y, float radius, int segments)`
+`nil Renderer.DrawCircle2d(Renderer renderer, number x, number y, number radius, number segments)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 renderer | Renderer | The circle is drawn using this renderer. | ✘
-x | float | Center x position of circle. | ✘
-y | float | Center y position of circle. | ✘
-radius | float |The radius of the circle. | ✘
-segments | int |The number of line segments used to draw the circle. | ✓ Default: 16
+x | number | Center x position of circle. | ✘
+y | number | Center y position of circle. | ✘
+radius | number |The radius of the circle. | ✘
+segments | number |The number of line segments used to draw the circle. | ✓ Default: 16
 
 ## DrawLine2d
 
@@ -97,7 +97,7 @@ start | Vector | Start point of the line. | ✘
 end | Vector | End point ofr the line. | ✘
 color | Vector | RGBA color to color the line. | ✓ Default: White
 
-`nil Renderer.DrawLine2d(float x1, float y1, float x2, float y2, Vector color)`
+`nil Renderer.DrawLine2d(number x1, number y1, number x2, number y2, Vector color)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -112,6 +112,13 @@ color | Vector | RGBA color to color the line. | ✓ Default: White
 
 Draw a filled rectangle to the screen. The rectangle can be specified with two vectors or our numbers.
 
+```lua
+-- Draw a black screen over the entire render area
+gRenderer:DrawRect2d(System.ScreenTopLeft(),
+                     System.ScreenBottomRight(),
+                     Vector.Create(0,0,0,1))
+```
+
 `nil Renderer.DrawRect2d(Renderer renderer, Vector bottomLeft, Vector topRight, Vector color)`
 
 Parameter |  Type | Description | Optional
@@ -121,15 +128,15 @@ bottomLeft| Vector | Bottom left point of rectangle. | ✘
 topRight | Vector | Top right point of rectangle. | ✘
 color | Vector | RGBA color to fill the rectangle with. | ✓ Default: Black
 
-`nil Renderer.DrawRect2d(Renderer renderer, float left, float bottom, float right, float top, Vector color)`
+`nil Renderer.DrawRect2d(Renderer renderer, number left, number bottom, number right, number top, Vector color)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 renderer | Renderer | The rectangle is drawn using this renderer. | ✘
-left| float | Position of left edge of the rectangle. | ✘
-bottom | float | Position of the bottom edge of the rectangle. | ✘
-right | float | Position of the right edge of the rectangle. | ✘
-top | float | Position of the top edge of the rectangle. | ✘
+left| number | Position of left edge of the rectangle. | ✘
+bottom | number | Position of the bottom edge of the rectangle. | ✘
+right | number | Position of the right edge of the rectangle. | ✘
+top | number | Position of the top edge of the rectangle. | ✘
 color | Vector | RGBA color to fill the rectangle with. | ✓ Default: Black
 
 
@@ -158,7 +165,7 @@ sprite | Sprite | The sprite to draw. | ✘
 
 Draw a string of text to the screen using the current options set for the renderer. By default text is draw aligned from the top, left.
 
-`nil Renderer.DrawText2d(Renderer renderer, Vector pos, string text, Vector color, float width)`
+`nil Renderer.DrawText2d(Renderer renderer, Vector pos, string text, Vector color, number width)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -166,18 +173,18 @@ renderer | Renderer | The text is drawn using this renderer. | ✘
 position | Vector | Position to draw the text. | ✘
 text | string | Text to draw. | ✘
 color | Vector | Color to draw the text. | ✓ Default: White
-width | float | The max width of the text before it's wrapped onto a new line | ✓ Default: -1 (no wrapping)
+width | number | The max width of the text before it's wrapped onto a new line | ✓ Default: -1 (no wrapping)
 
-`nil Renderer.DrawText2d(Renderer renderer, float x, float y, string text, Vector color, float width)`
+`nil Renderer.DrawText2d(Renderer renderer, number x, number y, string text, Vector color, number width)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 renderer | Renderer | The text is drawn using this renderer. | ✘
-x | float | x position to render text | ✘
-y | float | y position to render text | ✘
+x | number | x position to render text | ✘
+y | number | y position to render text | ✘
 text | string | Text to draw. | ✘
 color | Vector | Color to draw the text. | ✓ Default: White
-width | float | The max width of the text before it's wrapped onto a new line | ✓ Default: -1 (no wrapping)
+width | number | The max width of the text before it's wrapped onto a new line | ✓ Default: -1 (no wrapping)
 
 ## GetKern
 
@@ -197,7 +204,7 @@ char2 | string | y position to render text | ✓ Default: '\0'
 
 Return the camera rotation in degrees for the renderer. This is 0 by default.
 
-`float Renderer.GetRotate(Renderer renderer)`
+`number Renderer.GetRotate(Renderer renderer)`
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
@@ -205,7 +212,7 @@ renderer | Renderer | The renderer to get the rotation from. | ✘
 
 ## GetScale
 
-Returns the scale on the X and Y axis for the current renderer. The scale is X: 1, Y: 1 by defauly.
+Returns the scale on the X and Y axis for the current renderer. The scale is X: 1, Y: 1 by default.
 
 `Vector Renderer.GetScale(Renderer renderer)`
 
@@ -375,13 +382,35 @@ There are two blend modes:
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
-renderer | Renderer | The renderer to set the blend more for. | ✘
+renderer | Renderer | The renderer to set the blend mode for. | ✘
 blend | number | The number for the blend mode. 1 is normal, 2 is additive. There are some globals added by the renderer to make it more friendly to use. | ✘
 
 ## SetFont
 
-Set a font to be used for any subsequent draw text calls. All font must be included in the manifest before they can be used.
+Set a font to be used for any subsequent draw text calls. All fonts must be included in the manifest before they can be used.
+
+`nil Renderer.SetFont(Renderer renderer, string fontName)`
+
+Parameter |  Type | Description | Optional
+--------- | ------- | ---- | ----
+renderer | Renderer | The renderer to set the font for. | ✘
+fontName | string | The name of the font is defined in the manifest file. | ✘
 
 ## Translate
 
 Set the translation for the renderer.
+
+`nil Renderer.Translate(Renderer renderer, Vector position)`
+
+Parameter |  Type | Description | Optional
+--------- | ------- | ---- | ----
+renderer | Renderer | The renderer to translate. | ✘
+position | Vector | New offset for the renderer. Values are taken from the X, Y elements. | ✘
+
+`nil Renderer.Translate(Renderer renderer, number x, number y)`
+
+Parameter |  Type | Description | Optional
+--------- | ------- | ---- | ----
+renderer | Renderer | The renderer to scale. | ✘
+x | number | The x scale for the renderer. | ✘
+y | number | The y scale for the renderer. | ✓ Default: current y position

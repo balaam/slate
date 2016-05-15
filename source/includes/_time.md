@@ -85,7 +85,7 @@ Get the second value for the current time.
 
 Get the raw time string for the current date and time.
 
-```
+```lua
 local time = Time.GetTime()
 print("It's the year %s", Time.GetYear(time))
 ```
