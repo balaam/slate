@@ -32,7 +32,7 @@ Dinodeck is inspired by many great engines and graphics APIs I've used in the pa
 
 You can download the latest version from the website [dinodeck.com](http://dinodeck.com).
 
-This is documentation for [version 1.0](http://http://dinodeck.com/source/1.0/) of the engine.
+This is documentation for [version 1.0](http://dinodeck.com/source/1.0/) of the engine.
 
 # Structure
 
