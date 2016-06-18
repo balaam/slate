@@ -14,7 +14,7 @@ local id = Sound.Play("button_press", false)
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
-name | string | The name of the sound as defined in the manfiest. | ✘
+name | string | The name of the sound as defined in the manifest. | ✘
 loop | boolean | If the sound should loop. | ✓ Default: false
 
 The play function returns an `id` that can be used to control the sound.

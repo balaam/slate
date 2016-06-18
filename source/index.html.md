@@ -26,9 +26,9 @@ search: true
 
 # Introduction
 
-Dinodeck is a multiplatform, fast, rapid game development library. Powered by Lua, using OpenGL for graphics.
+Dinodeck is a multiplatform, fast, rapid game development library. It's powered by Lua and uses OpenGL for graphics.
 
-It's inspired by many great engines and graphics API I've used in the past but with an emphasis of speed of development and easy of distribution.
+Dinodeck is inspired by many great engines and graphics APIs I've used in the past but with an emphasis on speed of development and ease of distribution.
 
 You can download the latest version from the website [dinodeck.com](http://dinodeck.com).
 
@@ -39,7 +39,7 @@ This is documentation for [version 1.0](http://http://dinodeck.com/source/1.0/) 
 The Dinodeck engine is usually called ***dinodeck_win.exe*** on windows and ***dinodeck_mac*** on mac. When executed dinodeck does the following:
 
 1. Checks the local directory for **settings.lua**.
-2. If **settings.lua** doesn't exist in the local directory, it will attempt to look inside ***data.7z*** in the local directory and see if the file exists in that. This is true for all files it attempts to load.
+2. If **settings.lua** doesn't exist in the local directory, it attempts to look inside ***data.7z*** to check if the file exists there. This is true for all files it attempts to load.
 3. Reads settings.lua and creates a window to display graphics and a console to display debugging information.
 4. Loads a manifest file specified in the **settings.lua** file. This is usually **manifest.lua**
 5. The manifest is a list of assets: code files, fonts, textures, sounds etc. These are loaded into memory.
@@ -49,7 +49,7 @@ The Dinodeck engine is usually called ***dinodeck_win.exe*** on windows and ***d
 ## settings.lua
 
 This file controls the overall settings for the game.
-It's a Lua file, so it can contain any Lua code.
+It's a Lua file and so can contain any Lua code.
 
 > Here is an example settings file:
 
@@ -71,15 +71,15 @@ Field | Default | Description
 name | "CGGameLoop" | The name of your game. Appears on the window titlebar.
 width | 640 | The width of the render area in pixels.
 height | 360 | The height of the render area in pixels.
-main_script | "main.lua" | This is the first file lua file executed and where the `on_update` function is expected to exist.
+main_script | "main.lua" | This is the first file lua executes and where the `on_update` function is expected to exist.
 on_update | "update()" | The main game loop called once per frame.
-manifest | "" | The manifest file is described below. It contians the list of all the files the game needs.
+manifest | "" | The manifest file is described below. It lists all the files the game needs.
 webserver | false | Sets up a local webserver. Used for debugging.
 orientation | "portrait" | If you're tinkering with mobile then this is the default orientation to start in.
 
 ### Webserver
 
-If the `webserver` flag is set to `true` in the **settings.lua** file then dinodeck will run a local webserver on port 8080. The webbrowser is used for debugging.
+If the `webserver` flag is set to `true` in the **settings.lua** file then dinodeck runs a local webserver on port 8080. The webbrowser is used for debugging.
 
 > You can connect locally to the webserver through this address.
 
@@ -88,8 +88,6 @@ http://127.0.0.1:8080/
 ```
 
 The webserver doesn't serve any HTML by default, so if you try and view it using your browser nothing will happen. The webserver is a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) type setup.
-
-<aside class="warning">The webserver does not work on Mac. It should be run on a seperate thread and it isn't ...</aside>
 
 Reset the game with this call.
 
@@ -103,7 +101,7 @@ Run arbitary lua code with this call
 
 `http://127.0.0.1:8080/execute/`
 
-> Run this curl command and it will overwrite the `update` loop with one that prints "Hello" to the screen.
+> Run this curl command to overwrite the `update` loop with one that prints "Hello" to the screen.
 
 ```shell
 curl -XPOST -d 'update = function()
@@ -128,9 +126,9 @@ The expected value is `"portrait"` or `"landscape"`.
 
 ## manifest.lua
 
-The manifest file is a list of all the assets the game uses. Like the settings file it is a standard Lua file.
+The manifest file lists the assets the game uses. Like the settings file it is a standard Lua file.
 
-The manifest file is expected to have a table at the global level called "manifest". This table can then have serveral different subtables, each representing a different category of asset. This is best explained with an example.
+The manifest file is expected to have a table at the global level called "manifest". This table may have serveral different subtables, each representing a different category of asset. This is best explained with an example.
 
 > An example manifest file
 
@@ -162,7 +160,7 @@ manifest =
 }
 ```
 
-All assets are represented by a key, value pair. The key is the name of the asset that can be used in the project to access it, the value is table with the path to the asset file and additional meta data about how to treat the asset.
+All assets are represented by a key, value pair. The key is the name of the asset (used in the project to access it), the value is table with the path to the asset file and additional meta data about how to treat the asset.
 
 ### Supported Top Level Tables
 
@@ -196,7 +194,7 @@ The following texture formats are supported:
 
 Dinodeck uses [SOIL](http://www.lonesock.net/soil.html) to load images. Format documentation taken from the site.
 
-A texture asset may have an optional `scale` flag. This determines how the scaling works. By default scaling a sprite will cause the texture to be interpolated smoothing out the pixels. The `"pixelart"` flag scales using "nearest neighbour" so the pixel boundaries remain distinct.
+A texture asset may have an optional `scale` flag. This determines how the scaling works. By default scaling a sprite causes the texture to be interpolated; smoothing out the pixels. The `"pixelart"` flag scales using "nearest neighbor" so the pixel boundaries remain distinct.
 
 ### Sound Formats
 
@@ -235,7 +233,7 @@ LoadLibrary('Renderer')
 
 `LoadLibrary` takes in a string that must be the name of a valid library.
 
-Library names are case sensitive, trying to load a library that doesn't exist will cause Dinodeck a to enter a crash state.
+Library names are case sensitive, trying to load a library that doesn't exist causes Dinodeck to enter a crash state.
 
 Name |  Description
 --------- | -----------
@@ -268,7 +266,7 @@ gDt = GetDeltaTime()
 
 Returns the time in seconds that the last frame took to execute.
 
-Delta is often used to make animation run smoothly no matter the game speed. Dinodeck's frames are capped at 60 frames per second.
+Delta is often used to make animations run smoothly no matter the game speed. Dinodeck's frames are capped at 60 frames per second.
 
 ## GetTime
 
@@ -361,7 +359,7 @@ OnSuccess | function | A lua function that gets called on successfully contactin
 OnFailure | function | A lua function that gets called on failing to contact the target site | ✘
 
 
-Whening sending a POST request to a website. `OnSuccess` is called if contact is successfully made with the website. `OnFailure` occurs if the request times out or there's a failure to contact the website. The `OnSuccess` function maybe be passed the information from the website as a string. `PostData` can be sent with the request, such as a highscore, or it may be nil if no postdata is required.
+When sending a POST request to a website `OnSuccess` is called if contact is successfully made with the website. `OnFailure` occurs if the request times out or there's a failure to contact the website. The `OnSuccess` function may be passed the information from the website as a string. `PostData` can be sent with the request, such as a highscore, or it may be nil if no postdata is required.
 
 ## HttpPostData
 
@@ -391,7 +389,7 @@ The data is attached to the end of the URL
 
 ### multipart/form-data
 
-The data is attached to the request to the request in chunks.
+The data is attached to the request in chunks.
 
 ## AddValue
 

@@ -29,7 +29,7 @@ local y = Mouse:Y()
 
 ##Position
 
-The position X, Y position of the mouse returned as a `Vector`. The z coordinate is 0.
+The X, Y position of the mouse returned as a `Vector`. The z coordinate is 0.
 
 `Vector Mouse.Position()`
 
@@ -63,7 +63,7 @@ end
 
 ##JustReleased
 
-If a mouse button has just been pressed released.
+If a mouse button has just been pressed and then released.
 
 `bool Mouse.JustReleased(int mouseButton)`
 
@@ -72,7 +72,7 @@ Parameter |  Type | Description | Optional
 mouseButton | int | The mouse button to test either left, middle or right. | ✘
 
 ```lua
-if Mouse.JustPressed(MOUSE_BUTTON_LEFT) then
+if Mouse.JustReleased(MOUSE_BUTTON_LEFT) then
     print("Left mouse button released.")
 end
 ```
@@ -88,7 +88,7 @@ Parameter |  Type | Description | Optional
 mouseButton | int | The mouse button to test either left, middle or right. | ✘
 
 ```lua
--- This draws the hello world text next to the mouse position.
+-- Draws "Hello World" next to the mouse position.
 gRenderer = Renderer.Create()
 if Mouse.Held(MOUSE_BUTTON_LEFT) then
     local pos = Mouse.Position()

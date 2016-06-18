@@ -5,7 +5,7 @@ A class that represents a reference to a texture defined in the manifest file.
 
 ## Find
 
-This is a "static" function that let's you create textures from the manifest. They're all just a reference so creating two different textures using the same file doesn't cause any siginificant overhead.
+This is a "static" function that let's you create textures from the manifest. Each texture is a reference so creating two different textures using the same file doesn't cause any siginificant overhead.
 
 ```lua
 -- Imagine your manifest looks like this
@@ -33,7 +33,7 @@ string.format("The texture is %s pixels wide.",
 
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
-id | string | The id of the texture, as definied in the manifest file. | ✘
+id | string | The id of the texture, as defined in the manifest file. | ✘
 
 ## GetHeight
 

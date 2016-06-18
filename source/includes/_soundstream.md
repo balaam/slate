@@ -7,7 +7,7 @@ Soundstream is for streaming music from the hard disk.
 
 ## Play
 
-Start the playing the soundstream.
+Start playing the soundstream.
 
 ```lua
 local id = SoundStream.Play("background_music", true)

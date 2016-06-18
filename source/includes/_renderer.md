@@ -28,8 +28,8 @@ end
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 renderer | Renderer | The text alignment is set for this renderer. | ✘
-alignX | string | Takes in a "left", "right" or "center" alignment value. | ✓ Default: nil
-alignY | string | Takes in a "top", "bottom" or "center" alignment value. | ✓ Default: nil
+alignX | string | Takes in a "left", "right" or "center" alignment values. | ✓ Default: nil
+alignY | string | Takes in a "top", "bottom" or "center" alignment values. | ✓ Default: nil
 
 ## AlignTextX
 
@@ -57,7 +57,7 @@ align | string | Takes in a "top", "bottom" or "center" alignment value. | ✘
 
 ## Create
 
-Create a renderer object. Usually you'll only need a single renderer. (Future work _could_, in theory, extend this to allow renderers to draw to a texture instead of the screen.)
+Creates a `Renderer` object. Usually you'll only need a single renderer. (Future work _could_, in theory, extend this to allow renderers to draw to a texture instead of the screen.)
 
 `Renderer Renderer.Create()`
 
@@ -110,7 +110,7 @@ color | Vector | RGBA color to color the line. | ✓ Default: White
 
 ## DrawRect2d
 
-Draw a filled rectangle to the screen. The rectangle can be specified with two vectors or our numbers.
+Draws a filled rectangle to the screen. The rectangle can be specified with two vectors or four numbers.
 
 ```lua
 -- Draw a black screen over the entire render area
@@ -142,7 +142,7 @@ color | Vector | RGBA color to fill the rectangle with. | ✓ Default: Black
 
 ## DrawSprite
 
-Draw a sprite to the screen. Each sprite has it's own position which is where it will be drawn. Sprites are center aligned by default.
+Draw a sprite to the screen. Each sprite has it's own position. Sprites are center aligned by default.
 
 ```lua
 gRenderer = Renderer.Create()
@@ -188,7 +188,7 @@ width | number | The max width of the text before it's wrapped onto a new line |
 
 ## GetKern
 
-Kerning describes the pixel distance between two letters in a piece of text for a given font. i.e. `ll` tends to be closer together that `ww` in a non-monospace font.
+Kerning describes the pixel distance between two letters in a piece of text for a given font. i.e. `ll` tend to be closer together that `ww` in a non-monospace font.
 
 A string is passed into this function because Lua doesn't have a `char` type. If the string is greater than 1 character only the first character is used.
 

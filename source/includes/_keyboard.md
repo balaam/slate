@@ -1,6 +1,6 @@
 # > Keyboard
 
-The keyboard library lets you query the state of the keys.
+The keyboard library lets you query the state of the keyboard.
 
 The following globals are added to query the state of keys. Each entry is an integer value representing the keycode.
 
@@ -64,7 +64,7 @@ Key | Description
 `KEY_RALT` | The right alt key.
 `KEY_LALT` | The left alt key.
 
-<aside class="warning">The number keys are not exposed. That is certainly an oversight!</aside>
+<aside class="warning">There are a number keys that are not exposed. That is certainly an oversight!</aside>
 
 ## Held
 

@@ -22,7 +22,7 @@ local m3 = Matrix:Create(
 
 `Matrix Matrix.Create( nil )`
 
-If no data is passed in then a the matrix is initialised to the identity matrix.
+If no data is passed in then the matrix is initialised to the identity matrix.
 
 > The identity matrix.
 
@@ -77,7 +77,7 @@ rhs | Vector | Right-hand side vector in the multiplication. | ✘
 
 ## SetColumn
 
-This function lets us update a column inside a matrix.
+This function updates a column inside a matrix.
 
 `nil Matrix.SetColumn(Matrix m, int index, Vector v)`
 

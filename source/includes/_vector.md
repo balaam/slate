@@ -4,7 +4,7 @@ A Vector class. It has four elements: XYZW. It's used for physics simulations an
 
 ## Add
 
-Add two vectors together, or add a number to all vector values.
+Adds two vectors together, or adds a number to all vector values.
 
 ```lua
 local v1 = Vector.Create(0, 0, 0, 1)
@@ -70,7 +70,7 @@ print(s2) -- (1, 2, 3, 4)
 
 `Vector Vector.Create()`
 
-With on arguments an empty vector with all elements set to zero is returned.
+With no arguments an empty vector with all elements set to zero is returned.
 
 `Vector Vector.Create(float x, float y, float z, float w)`
 
@@ -213,7 +213,7 @@ Normalize the vector to a unit vector. The same as Normalize2 but for X, Y, Z
 
 ## Normalize4
 
-Normalize the vector to a unit vector. The same as Normalize3 but for X, Y, Z
+Normalize the vector to a unit vector. The same as Normalize3 but for X, Y, Z, W.
 
 ## SetBroadcast
 

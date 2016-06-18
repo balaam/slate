@@ -17,7 +17,7 @@ Get the color of the sprite. By default the color is white RGBA: (1, 1, 1, 1).
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 s | Sprite | The sprite to get the color from. | ✘
-v | Vector | The sprite Color will be written into this vector. | ✘
+v | Vector | The sprite color is written into this vector. | ✘
 
 `Vector Sprite.GetColor(Sprite s)`
 
@@ -34,7 +34,7 @@ Get the position of the sprite. By default this is X: 0, Y: 0.
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 s | Sprite | The sprite to get the Position from. | ✘
-v | Vector | The sprite position will be written into the X, Y components of this vector. | ✘
+v | Vector | The sprite position is written into the X, Y components of this vector. | ✘
 
 `Vector Sprite.GetPosition(Sprite s)`
 
@@ -61,7 +61,7 @@ Gets the scale for the sprite. By default this is X:1, Y:1.
 Parameter |  Type | Description | Optional
 --------- | ------- | ---- | ----
 s | Sprite | The sprite to get the scale from. | ✘
-v | Vector | The sprite scale will be written into the X, Y components of this vector. | ✘
+v | Vector | The sprite scale is written into the X, Y components of this vector. | ✘
 
 `Vector Sprite.GetScale(Sprite s)`
 
@@ -93,7 +93,7 @@ s | Sprite | The sprite to get the texture from. | ✘
 
 ## SetColor
 
-Set color of the sprite. This color uses a multiply blend. This means if the sprite was a white circle with a black border and it's color was set to red, the white parts would be red and the black would stay the same.
+Set the color of the sprite. This color uses a multiply blend. This means if the sprite was a white circle with a black border and it's color was set to red, the white parts would be red and the black would stay the same.
 
 ```lua
 local s = Sprite.Create()
@@ -113,7 +113,7 @@ color | Vector | The color of the sprite. XYZW elements map to RGBA. | ✘
 
 ## SetPosition
 
-Set the position for a sprite. This is where it will be drawn when rendered. By default the position is X: 0, Y: 0; dead center of the screen.
+Set the position for a sprite. This is where it's drawn when rendered. By default the position is X: 0, Y: 0; dead center of the screen.
 
 ```lua
 -- Draw an image in top left corner of the screen
@@ -173,7 +173,7 @@ rotation | number | The rotation in degrees. | ✘
 
 ## SetScale
 
-Set the scale for the sprite. 1 represents the sprites original scale. The default scale for a sprite is X: 1, Y: 1.
+Set the scale for the sprite. 1 represents the sprite's original scale. The default scale for a sprite is X: 1, Y: 1.
 
 ```lua
 local s = Sprite.Create()
@@ -225,7 +225,7 @@ t | Texture | The texture to assign to the sprite. | ✘
 
 ## SetUVs
 
-Set the texture coordinates for the sprite. If you're not already familiar with U,Vs they can be through as defining a rectangle to _cut_ out of the sprite's texture. By default we use the entire texture from the top left (0,0) to the bottom right (1, 1).
+Set the texture coordinates for the sprite. If you're not already familiar with U,Vs they; define a rectangle that's _cut_ out of the sprite's texture. By default we use the entire texture from the top left (0,0) to the bottom right (1, 1).
 
 ```lua
 --Use only the top quarter of a texture
@@ -234,7 +234,7 @@ s:SetTexture(Texture.Find("logo.png"))
 s:SetUVs(0, 0, 0.5, 0.5)
 ```
 
-Using the function you can do neat things like scroll the UVs.
+Using this function you can do neat things like scroll the UVs.
 
 `nil Sprite.SetUVs(Sprite s, number u1, number v1, number u2, number v2)`
 
