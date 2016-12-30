@@ -49,3 +49,14 @@ Get the height of the screen in pixels.
 Get the width of the screen in pixels.
 
 `number ScreenWidth()`
+
+## Version
+
+Returns the current version of Dinodeck as a string.
+
+`string Version()`
+
+```lua
+local version = System.Version()
+print(version) -- "v1.1.2"
+```

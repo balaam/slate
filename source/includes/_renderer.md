@@ -70,6 +70,34 @@ function update()
 end
 ```
 
+## Clip
+
+Define a clipping rectangle in screenspace. Pixels are only drawn inside the rectangle. Clip commands can be nested but only the most recently set clipping command is active.
+
+`nil Renderer.Clip(Renderer renderer, number x, number y, number width, number height, function doRender)`
+
+Parameter |  Type | Description | Optional
+--------- | ------- | ---- | ----
+renderer | Renderer | The renderer to clip. | ✘
+x | number | Left position of the clipping rectangle. | ✘
+y | number | Top position of the clipping rectangle. | ✘
+width | number | Width of the clipping rectangle. Negative numbers are rounded to 0. | ✘
+height | number | Height of the clipping rectangle. Negative numbers are rounded to 0. | ✘
+doRender | function | Any render commands called in this function, are clipped to the clipping rectangle. | ✘
+
+
+```lua
+gRenderer = Renderer:Create()
+
+function update()
+    -- The right half of the screen gets clipped.
+    gRenderer:Clip(0,0, System.ScreenWidth()/2, System.ScreenHeight()/2,
+    function()
+        gRenderer:DrawText2d(0,0,"Hello World")
+    end)
+end
+```
+
 ## DrawCircle2d
 
 Draw an unfilled circle to the screen. The circle is always white.

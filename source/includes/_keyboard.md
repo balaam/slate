@@ -48,6 +48,16 @@ Key | Description
 `KEY_X` | The X key.
 `KEY_Y` | The Y key.
 `KEY_Z` | The Z key.
+`KEY_0` | The 0 key.
+`KEY_1` | The 1 key.
+`KEY_2` | The 2 key.
+`KEY_3` | The 3 key.
+`KEY_4` | The 4 key.
+`KEY_5` | The 5 key.
+`KEY_6` | The 6 key.
+`KEY_7` | The 7 key.
+`KEY_8` | The 8 key.
+`KEY_9` | The 9 key.
 `KEY_UP` | The up arrow key.
 `KEY_DOWN` | The down arrow key.
 `KEY_RIGHT` | The right arrow key.

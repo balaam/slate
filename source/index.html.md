@@ -33,7 +33,7 @@ Dinodeck is inspired by many great engines and graphics APIs I've used in the pa
 
 You can download the latest version from the website [dinodeck.com](http://dinodeck.com).
 
-This is documentation for [version 1.0](http://dinodeck.com/source/1.0/) of the engine.
+This is documentation for [version 1.1.2](https://github.com/dinodeck/dinodeck/tree/v1.1.2) of the engine.
 
 # Structure
 
@@ -202,10 +202,6 @@ A texture asset may have an optional `scale` flag. This determines how the scali
 Only .wav is supported.
 
 # General Notes
-
-## Escape To Quit
-
-At the moment pressing Escape closes the application. This isn't a very good default behaviour and will be removed in a future update.
 
 ## Running Multiple Versions
 
