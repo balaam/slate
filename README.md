@@ -25,3 +25,9 @@ We're deloying to `dinodeck.com/docs` and this is available in `../dinodeck.com`
 There's a handy rake command to update it.
 
     rake update_docs
+
+Then you can use similar commands to update the website.
+
+    rake stage_tag
+    rake stage_production
+    cap production_deploy
